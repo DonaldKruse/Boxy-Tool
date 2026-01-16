@@ -14,7 +14,7 @@ class SallocModel:
     """
 
     def __init__(self, nodes=1, time="01:00:00", partition=None, name=None,
-                 cluster=cluster, gpus_per_node=None):
+                 cluster="cluster", gpus_per_node=None):
         self._cluster = cluster
         self._nodes = nodes
         self._time = time
@@ -25,13 +25,7 @@ class SallocModel:
 
         self._cmd = None
 
-        
-    def allocate(self):
-        """
-        Call `salloc` (with --parsable) to reserve nodes.
-        Returns the job ID string on success.
-        Raises RuntimeError on failure.
-        """
+    def build_cmd(self):
         cmd = [
             "salloc",
             f"--nodes={self._nodes}",
@@ -48,6 +42,15 @@ class SallocModel:
 
 
         self._cmd = cmd
+
+        
+    def allocate(self):
+        """
+        Call `salloc` (with --parsable) to reserve nodes.
+        Returns the job ID string on success.
+        Raises RuntimeError on failure.
+        """
+        self.build_cmd(self)
 
         try:
             out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True)

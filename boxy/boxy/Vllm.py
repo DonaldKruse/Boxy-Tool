@@ -2,7 +2,7 @@
 
 import os
 from typing import List, Optional
-import common
+from . import common
 
 class Vllm:
     """

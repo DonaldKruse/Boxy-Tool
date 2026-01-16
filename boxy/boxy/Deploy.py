@@ -4,11 +4,11 @@ import os
 import subprocess
 from typing import Optional, List
 
-import common
-from boxy import Boxy
-from container import Container
-from salloc_model import SallocModel as Alloc
-from vllm import Vllm
+from . import common
+from . import Boxy
+from . import Container
+from . import Alloc 
+from . import Vllm
 
 
 class Deploy:
@@ -79,7 +79,7 @@ class Deploy:
         until the process exits.
         """
         # 1) Allocate SLURM nodes
-        self.allocate()
+        #self.allocate()
 
         # 2) Optionally pull or build the container image
         image_ref = self.boxy.image_name if self.runtime == "podman" else f"{self.boxy.short_name}.sif"

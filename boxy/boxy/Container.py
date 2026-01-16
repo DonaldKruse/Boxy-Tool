@@ -5,7 +5,7 @@ class Container:
     Wraps Docker/Podman pull & build operations as subprocesses.
 
     Example:
-        c = Container(engine="podman")
+        c = Container(runtime="podman")
         c.pull("alpine:latest")
         c.build(
             context_path=".",
@@ -56,7 +56,7 @@ class Container:
             completed = subprocess.run(
                 cmd,
                 check=True,
-                capture_output=True,
+                #capture_output=True,
                 text=True
             )
             return completed.stdout.strip()
