@@ -6,7 +6,9 @@ from boxy.Deploy import Deploy
 import boxy.common as common
 
 # 1) Construct each collaborator however you like:
-allocator = Salloc(nodes=2, time="00:30:00", partition="debug")
+allocator = Salloc(nodes=2, time="00:30:00", partition="short")
+allocator.allocate()
+exit()
 box = Boxy()
 container = Container(runtime="podman")
 vllm     = Vllm(model_name=common.models[0],
